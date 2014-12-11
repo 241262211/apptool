@@ -1,0 +1,6 @@
+2014-12-08 22:21:08,036 [8] ERROR Min5LOG [(null)] - debug1
+2014-12-08 22:21:08,322 [8] INFO  Min5LOG [(null)] - Info1
+2014-12-08 22:51:48,934 [10] INFO  Min5Log [(null)] - infostring
+2014-12-08 23:34:04,084 [9] INFO  Min5Log [(null)] - starttime:2014-12-08 11:34:02 294
+2014-12-08 23:34:05,408 [9] ERROR Min5Log [(null)] - getNewestDateForDayKLine error,errMsg:   在 DAL.DBOperator.ExecuteQuerry(String sqlStr, Object[] sqlParams) 位置 E:\vc_project\AppTool\AppTool\DAL\DBOperator.cs:行号 394
+   在 BLL.StockBll.getNewestDateForMin5KLine(Hashtable& codedateHt) 位置 E:\vc_project\AppTool\AppTool\BLL\StockBll.cs:行号 571

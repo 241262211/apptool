@@ -1,0 +1,30 @@
+﻿error stock code:430289
+error stock code:830828
+error   reg not match:var hq_str_sh600631="";
+error   reg not match:var hq_str_sh603998="";
+error   Except:601908,exMsg:
+error   Except:002531,exMsg:
+error   Except:002121,exMsg:
+error   Except:002350,exMsg:
+error   Except:002606,exMsg:
+error   Except:002179,exMsg:
+error   Except:002104,exMsg:
+error   Except:603005,exMsg:
+error   Except:002185,exMsg:
+error   Except:601908,exMsg:
+error   Except:002531,exMsg:
+error   Except:002121,exMsg:
+error   Except:002350,exMsg:
+error   Except:002606,exMsg:
+error   Except:002179,exMsg:
+error   Except:002104,exMsg:
+error   Except:603005,exMsg:
+error   Except:002185,exMsg:
+error   Except:300205,exMsg:
+error   Except:300267,exMsg:
+error   Except:000598,exMsg:
+error   Except:002650,exMsg:
+error   Except:600547,exMsg:
+error   Except:600340,exMsg:
+error   Except:600631,exMsg:
+error   Except:603998,exMsg:

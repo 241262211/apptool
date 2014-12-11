@@ -1,0 +1,19 @@
+﻿error stock code:430289
+error stock code:830828
+error stock code:900948
+error stock code:900942
+error stock code:900934
+error stock code:430289
+error stock code:830828
+error stock code:430289
+error stock code:830828
+error stock code:430289
+error stock code:830828
+error stock code:430289
+error stock code:830828
+error stock code:430289
+error stock code:830828
+error stock code:430289
+error stock code:830828
+error   reg not match:var hq_str_sh600631="";
+error   reg not match:var hq_str_sh603998="";

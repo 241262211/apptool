@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="a56981bb-2006-4cf2-b9a0-2f377a0edeb4" name="Administrator@USER-20140925PT 2014-12-01 21:55:32" runUser="USER-20140925PT\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestSettings name="本地测试运行" id="d2d3de89-ec2e-4c62-9313-adcfd4200b5d">
+    <Description>这是本地测试运行的默认测试运行配置。</Description>
+    <Deployment runDeploymentRoot="Administrator_USER-20140925PT 2014-12-01 21_55_32">
+      <DeploymentItem filename="E:\vc_project\AppTool\AppTool\DLL\LitJson.dll" />
+      <DeploymentItem filename="E:\vc_project\AppTool\AppTool\DLL\Ionic.Zip.dll" />
+      <DeploymentItem filename="E:\vc_project\AppTool\packages\HtmlAgilityPack.1.4.9\lib\Net20\HtmlAgilityPack.dll" />
+      <DeploymentItem filename="E:\vc_project\AppTool\AppTool\DLL\ICSharpCode.SharpZipLib.dll" />
+      <DeploymentItem filename="E:\vc_project\AppTool\AppTool\DLL\ChnCharInfo.dll" />
+      <DeploymentItem filename="E:\vc_project\AppTool\AppTool\DLL\Sybase.Data.AseClient.dll" />
+      <DeploymentItem filename="E:\vc_project\AppTool\AppTool\DLL\Memcached.ClientLibrary.dll" />
+      <DeploymentItem filename="E:\vc_project\AppTool\AppTool\DLL\log4net.dll" />
+      <DeploymentItem filename="E:\vc_project\AppTool\AppTool\bin\Debug\AppTool.exe" />
+      <DeploymentItem filename="E:\vc_project\AppTool\AppTool\DLL\Commons.dll" />
+      <DeploymentItem filename="E:\vc_project\AppTool\AppTool\DLL\NPOI.dll" />
+    </Deployment>
+    <Execution>
+      <TestTypeSpecific />
+      <AgentRule name="Execution Agents">
+      </AgentRule>
+    </Execution>
+  </TestSettings>
+  <Times creation="2014-12-01T21:55:32.8181369+08:00" queuing="2014-12-01T21:55:41.9496592+08:00" start="2014-12-01T21:55:42.3916845+08:00" finish="2014-12-01T21:56:15.6545870+08:00" />
+  <ResultSummary outcome="Error">
+    <Counters total="1" executed="1" error="0" failed="0" timeout="0" aborted="1" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" passed="0" completed="0" inProgress="0" pending="0" />
+    <RunInfos>
+      <RunInfo computerName="USER-20140925PT" outcome="Warning" timestamp="2014-12-01T21:55:37.1733860+08:00">
+        <Text>警告: 测试运行部署问题: 找不到程序集或模块“Interop.Microsoft.Office.Interop.Word”由 测试容器“e:\vc_project\apptool\apptest\bin\debug\apptest.dll” 直接或间接引用。</Text>
+      </RunInfo>
+      <RunInfo computerName="USER-20140925PT" outcome="Error" timestamp="2014-12-01T21:56:15.6425863+08:00">
+        <Text>测试宿主进程意外退出。</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+  <TestDefinitions>
+    <UnitTest name="SetLocalDBSourceTest" storage="e:\vc_project\apptool\apptest\bin\debug\apptest.dll" id="80ad3ad2-8eed-8377-92e5-02884a8d6b7b">
+      <DeploymentItems>
+        <DeploymentItem filename="AppTool.exe" />
+      </DeploymentItems>
+      <Execution id="521711c9-87ea-4aa2-b0e2-5e4b5b8f9552" />
+      <TestMethod codeBase="E:/vc_project/AppTool/apptest/bin/Debug/apptest.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="apptest.DBFactoryTest, apptest, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="SetLocalDBSourceTest" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="80ad3ad2-8eed-8377-92e5-02884a8d6b7b" executionId="521711c9-87ea-4aa2-b0e2-5e4b5b8f9552" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="521711c9-87ea-4aa2-b0e2-5e4b5b8f9552" testId="80ad3ad2-8eed-8377-92e5-02884a8d6b7b" testName="SetLocalDBSourceTest" computerName="USER-20140925PT" duration="00:00:32.9938871" startTime="2014-12-01T21:55:42.6596998+08:00" endTime="2014-12-01T21:56:15.6535869+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Aborted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="521711c9-87ea-4aa2-b0e2-5e4b5b8f9552">
+    </UnitTestResult>
+  </Results>
+</TestRun>

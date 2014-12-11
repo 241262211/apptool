@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="98281926-bed5-499e-8718-030b186fee03" name="Administrator@USER-20140925PT 2014-12-01 21:59:52" runUser="USER-20140925PT\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestSettings name="本地测试运行" id="d2d3de89-ec2e-4c62-9313-adcfd4200b5d">
+    <Description>这是本地测试运行的默认测试运行配置。</Description>
+    <Deployment runDeploymentRoot="Administrator_USER-20140925PT 2014-12-01 21_59_52">
+      <DeploymentItem filename="E:\vc_project\AppTool\AppTool\DLL\LitJson.dll" />
+      <DeploymentItem filename="E:\vc_project\AppTool\AppTool\DLL\Ionic.Zip.dll" />
+      <DeploymentItem filename="E:\vc_project\AppTool\packages\HtmlAgilityPack.1.4.9\lib\Net20\HtmlAgilityPack.dll" />
+      <DeploymentItem filename="E:\vc_project\AppTool\AppTool\DLL\ICSharpCode.SharpZipLib.dll" />
+      <DeploymentItem filename="E:\vc_project\AppTool\AppTool\DLL\ChnCharInfo.dll" />
+      <DeploymentItem filename="E:\vc_project\AppTool\AppTool\DLL\Sybase.Data.AseClient.dll" />
+      <DeploymentItem filename="E:\vc_project\AppTool\AppTool\DLL\Memcached.ClientLibrary.dll" />
+      <DeploymentItem filename="E:\vc_project\AppTool\AppTool\DLL\log4net.dll" />
+      <DeploymentItem filename="E:\vc_project\AppTool\AppTool\bin\Debug\AppTool.exe" />
+      <DeploymentItem filename="E:\vc_project\AppTool\AppTool\DLL\Commons.dll" />
+      <DeploymentItem filename="E:\vc_project\AppTool\AppTool\DLL\NPOI.dll" />
+    </Deployment>
+    <Execution>
+      <TestTypeSpecific />
+      <AgentRule name="Execution Agents">
+      </AgentRule>
+    </Execution>
+  </TestSettings>
+  <Times creation="2014-12-01T21:59:52.6179966+08:00" queuing="2014-12-01T21:59:56.8292375+08:00" start="2014-12-01T21:59:57.2462613+08:00" finish="2014-12-01T22:00:01.3244946+08:00" />
+  <ResultSummary outcome="Failed">
+    <Counters total="1" executed="1" error="0" failed="1" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" passed="0" completed="0" inProgress="0" pending="0" />
+    <RunInfos>
+      <RunInfo computerName="USER-20140925PT" outcome="Warning" timestamp="2014-12-01T21:59:53.6420552+08:00">
+        <Text>警告: 测试运行部署问题: 找不到程序集或模块“Interop.Microsoft.Office.Interop.Word”由 测试容器“e:\vc_project\apptool\apptest\bin\debug\apptest.dll” 直接或间接引用。</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+  <TestDefinitions>
+    <UnitTest name="SetLocalDBSourceTest" storage="e:\vc_project\apptool\apptest\bin\debug\apptest.dll" id="80ad3ad2-8eed-8377-92e5-02884a8d6b7b">
+      <DeploymentItems>
+        <DeploymentItem filename="AppTool.exe" />
+      </DeploymentItems>
+      <Execution id="cfb44e18-4d4c-49b3-b3ff-814b0251cd4d" />
+      <TestMethod codeBase="E:/vc_project/AppTool/apptest/bin/Debug/apptest.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="apptest.DBFactoryTest, apptest, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="SetLocalDBSourceTest" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="80ad3ad2-8eed-8377-92e5-02884a8d6b7b" executionId="cfb44e18-4d4c-49b3-b3ff-814b0251cd4d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="cfb44e18-4d4c-49b3-b3ff-814b0251cd4d" testId="80ad3ad2-8eed-8377-92e5-02884a8d6b7b" testName="SetLocalDBSourceTest" computerName="USER-20140925PT" duration="00:00:00.2827818" startTime="2014-12-01T21:59:57.5782803+08:00" endTime="2014-12-01T22:00:01.1314835+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="cfb44e18-4d4c-49b3-b3ff-814b0251cd4d">
+      <Output>
+        <ErrorInfo>
+          <Message>测试方法 apptest.DBFactoryTest.SetLocalDBSourceTest 引发了异常: 
+System.BadImageFormatException: 未能加载文件或程序集“AppTool, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null”或它的某一个依赖项。试图加载格式不正确的程序。</Message>
+          <StackTrace>    在 apptest.DBFactoryTest.SetLocalDBSourceTest()
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+</TestRun>

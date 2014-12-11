@@ -1,0 +1,72 @@
+﻿ 
+---1  文章主档表
+---ARTBASE
+DROP TABLE IF EXISTS `ARTBASE`;
+CREATE TABLE ARTBASE( 
+atb_artid   int(16)    NOT NULL   ,
+atb_shopid   int(16)    NULL   ,
+atb_shopname   varchar(100)    NULL   ,
+atb_homepic   varchar(200)    NULL   ,
+atb_maintitle   varchar(100)    NULL   ,
+atb_secondtitle   varchar(100)    NULL   ,
+atb_sectiontype   varchar(20)    NULL   ,
+atb_abstract   varchar(255)    NULL   ,
+atb_toppic   varchar(200)    NULL   ,
+atb_sharetxt   varchar(200)    NULL   ,
+atb_sharecnt   int(4)    NULL   ,
+atb_viewcnt   int(4)    NULL   ,
+atb_likecnt   int(4)    NULL   ,
+atb_collectcnt   int(4)    NULL   ,
+atb_authorid   int(16)    NULL   ,
+atb_createtime   varchar(50)    NULL   ,
+atb_bak1   varchar(200)    NULL   ,
+primary key(atb_artid)
+) ENGINE = MyISAM ;
+ 
+---2  文章内容表
+---ARTCONTENT
+DROP TABLE IF EXISTS `ARTCONTENT`;
+CREATE TABLE ARTCONTENT( 
+atc_artid   int(16)    NOT NULL   ,
+atc_no   int(4)    NOT NULL   ,
+atc_type   char(10)    NULL   ,
+atc_contentpart   varchar(1000)    NULL   ,
+atc_bak1   varchar(200)    NULL   ,
+primary key(atc_artid,atc_no)
+) ENGINE = MyISAM ;
+ 
+---3  用户表
+---APPUSER
+DROP TABLE IF EXISTS `APPUSER`;
+CREATE TABLE APPUSER( 
+usr_usrid   int(16)    NOT NULL   ,
+usr_gender   int(2)    NULL   ,
+usr_status   int(4)    NULL   ,
+usr_name   varchar(40)    NULL   ,
+usr_role   varchar(40)    NULL   ,
+usr_loginname   varchar(40)    NULL   ,
+usr_password   varchar(40)    NULL   ,
+usr_province   varchar(20)    NULL   ,
+usr_city   varchar(40)    NULL   ,
+usr_avatar   varchar(200)    NULL   ,
+usr_exptag   varchar(100)    NULL   ,
+usr_sumary   varchar(500)    NULL   ,
+usr_bak1   varchar(200)    NULL   ,
+primary key(usr_usrid)
+) ENGINE = MyISAM ;
+ 
+---4  店铺属性表
+---SHOP
+DROP TABLE IF EXISTS `SHOP`;
+CREATE TABLE SHOP( 
+shp_shopid   int(16)    NOT NULL   ,
+shp_name   varchar(100)    NULL   ,
+shp_map   varchar(100)    NULL   ,
+shp_mapaddr   varchar(200)    NULL   ,
+shp_address   varchar(200)    NULL   ,
+shp_price   varchar(100)    NULL   ,
+shp_contact   varchar(200)    NULL   ,
+shp_opentime   varchar(100)    NULL   ,
+shp_bak1   varchar(200)    NULL   ,
+primary key(shp_shopid)
+)  ENGINE = MyISAM;
