@@ -330,16 +330,16 @@ namespace DAL
                 LogHelper.SetP("GetUpdateSql生成语句(自动生成Where条件):" + strOutstr.Replace("'", "''"), (int)LogLevel.DEBUG);
                 int iResult = dbAccess.ExecuteNonQuerry(strOutstr);
 
-                if (iResult <= 0)
-                {
-                    LogHelper.SetP("[HLPU01]未修改任何记录(自动生成Where条件)", (int)LogLevel.ERROR);
-                    throw new ACMSCustomException("HLPU01");
-                }
-                else
-                {
-                    strOutstr = iResult.ToString();
-                    return true;
-                }
+                //if (iResult < 0)
+                //{
+                //    LogHelper.SetP("[HLPU01]未修改任何记录(自动生成Where条件)", (int)LogLevel.ERROR);
+                //    throw new ACMSCustomException("HLPU01");
+                //}
+                //else
+                //{
+                strOutstr = iResult.ToString();
+                return true;
+                
             }
             catch (ACMSCustomException)
             {
@@ -360,11 +360,16 @@ namespace DAL
         /// <returns>是否成功</returns>
         public static Boolean UpdateByModel<T>(List<T> entity, out string strOutstr)
         {
+            
+            if (entity == null || entity.Count == 0)
+            {
+                strOutstr = "传入的列表为空";
+                return false;
+            }
             try
             {
                 DBFactory dbFactory = DBFactory.GetDBFactoryInstance();
                 DBOperator dbAccess = dbFactory.GetLocalDBOperator();
-
                 strOutstr = string.Empty;
                 string strTmp = string.Empty;
                 ArrayList arrOutStr = new ArrayList();

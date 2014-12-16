@@ -24,7 +24,7 @@ namespace BLL
     /// <summary>
     /// 读word
     /// </summary>
-    public class ReadWordFile
+    public class ReadWordFile:IDisposable
     {
         /// <summary>
         /// 缺省值
@@ -46,17 +46,24 @@ namespace BLL
         /// </summary>
         public void Close()
         {
-            if (m_cls == null || m_doc == null)
+            try
             {
-                return;
-            }
+                if (m_cls == null || m_doc == null)
+                {
+                    return;
+                }
 
-            object oSaveChange = false;
-            if (m_doc != null)
-            {
-                m_doc.Close(ref oSaveChange, ref missing, ref missing);
+                object oSaveChange = false;
+                if (m_doc != null)
+                {
+                    m_doc.Close(ref oSaveChange, ref missing, ref missing);
+                }
+                m_cls.Quit(ref oSaveChange, ref missing, ref missing);
             }
-            m_cls.Quit(ref oSaveChange, ref missing, ref missing);
+            catch
+            {
+            	
+            }            
         }
 
         /// <summary>
@@ -125,15 +132,19 @@ namespace BLL
         /// <returns></returns>
         public string GetLinePreTable(Table t1)
         {
-            // 获取表格之前一行文字
-
-            Word.Range range = t1.Range;
-            Word.Range range1 = range.GoToPrevious(Microsoft.Office.Interop.Word.WdGoToItem.wdGoToLine);
-            string str = range1.Text;
-            int n1 = range.Start;
-            m_cls.Selection.Start = n1 - 100;
-            m_cls.Selection.End = n1;
-            string str1 = m_cls.Selection.Range.Text;
+            // 获取表格之前一行文字            
+            //Word.Range range1 = range.GoToPrevious(Microsoft.Office.Interop.Word.WdGoToItem.wdGoToLine);
+            //string str = range1.Text;
+            
+            string str1 = string.Empty;
+            lock (m_cls)
+            {
+                Word.Range range = t1.Range;
+                int n1 = range.Start;
+                m_cls.Selection.Start = n1 - 100;
+                m_cls.Selection.End = n1;
+                str1 = m_cls.Selection.Range.Text;
+            }            
             char[] chs = { '\r', ' ', '\a', '\t' };
             str1 = str1.Trim(chs).ToUpper();
             /*
@@ -302,6 +313,12 @@ namespace BLL
 
 
 
+
+
+        public void Dispose()
+        {
+            this.Close();
+        }
 
     }
 }

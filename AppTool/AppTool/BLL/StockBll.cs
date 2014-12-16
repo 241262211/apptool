@@ -114,9 +114,9 @@ namespace BLL
             errMsg = string.Empty;
             try
             {               
-                Parallel.For(0,40,(i)=>{
+                Parallel.For(0,67,(i)=>{
                     HtmlDocument doc = new HtmlDocument();
-                    string url = string.Format("http://vip.stock.finance.sina.com.cn/q/go.php/vIR_CustomSearch/index.phtml?p={0}", (i + 1).ToString());
+                    string url = string.Format("http://vip.stock.finance.sina.com.cn/q/go.php/vIR_CustomSearch/index.phtml?p={0}&sr_p=-1", (i + 1).ToString());
                     if (GetMothed(url, out doc))
                     {
                         try
@@ -136,10 +136,15 @@ namespace BLL
                                 if (reg0.IsMatch(tdList[0].InnerHtml))
                                 {
                                     codeNum = reg0.Replace(tdList[0].InnerHtml, "$1");
+                                    if (codeNum.Length < 6 || (codeNum[0] != '0' && codeNum[0] != '3' && codeNum[0] != '6'))//代码不符合要求                                    
+                                    {                                        
+                                        continue;
+                                    }
                                 }
                                 else
                                 {
-                                    LogHelper.ErrorLog("getAllStockCode RegError" + tdList[0].InnerHtml);
+                                    LogHelper.ErrorLog("getAllStockCode RegError for code:" + tdList[0].InnerHtml);
+                                    continue;
                                 }
                                 if (reg1.IsMatch(tdList[1].InnerHtml))
                                 {
@@ -147,11 +152,11 @@ namespace BLL
                                 }
                                 else
                                 {
-                                    LogHelper.ErrorLog("getAllStockCode RegError" + tdList[1].InnerHtml);
+                                    LogHelper.ErrorLog("getAllStockCode RegError for name:" + tdList[1].InnerHtml);
                                 }
                                 sectionName = tdList[8].InnerHtml;
                                 grade = tdList[2].InnerHtml.Trim();
-                                LogHelper.InfoLog(string.Format("page:{0}  row:{1} code:{2}    codeName:{3}    sectionName:{4}", i, j, codeNum, codeName, sectionName));
+                                LogHelper.InfoLog(string.Format("page:{0}  row:{1} code:{2}    codeName:{3}    sectionName:{4}", i+1, j, codeNum, codeName, sectionName));
                                 StockbaseBean baseBean = new StockbaseBean();
                                 baseBean.Code = codeNum;
                                 baseBean.Name = codeName;
@@ -258,27 +263,31 @@ namespace BLL
             errMsg = string.Empty;
             try
             {
-                LogHelper.InfoLog("starttime:" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss fff"), "DayKLog");
+                LogHelper.InfoLog("starttime:" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff"), "DayKLog");
                 Hashtable codedateHt = new Hashtable();
                 if (!getNewestDateForDayKLine(out codedateHt))
                 {
                     return false;
                 }
-                StockbaseBean baseBean = new StockbaseBean();
-                string sqlwhere = @"1=1";
-                DataSet ds;
-                SqlHelper.QueryByModel(baseBean, sqlwhere, out ds, out errMsg);
-                Regex reg = new Regex(@"(?:=|\|)((\d+).*?)(?=\|)");                
-                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
-                {
-                    int count = 0;
-                    Parallel.ForEach(ds.Tables[0].AsEnumerable(), (dr) => {
+                //StockbaseBean baseBean = new StockbaseBean();
+                //string sqlwhere = @"1=1";
+                //DataSet ds;
+                //SqlHelper.QueryByModel(baseBean, sqlwhere, out ds, out errMsg);
+                             
+                //if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                //{
+                //    int count = 0;
+                //    Parallel.ForEach(ds.Tables[0].AsEnumerable(), (dr) => {
+                int count = 0;
+                Regex reg = new Regex(@"(?:=|\|)((\d+).*?)(?=\|)");   
+                Dictionary<string, string> codeDic = StockHelper.getAllStockCode();   
+                Parallel.ForEach(codeDic, (dicEntry) =>{
                         count++;
                         //form.SetHisBarValue(100 * count++ / ds.Tables[0].Rows.Count);
                         string urlformat = @"http://qd.10jqka.com.cn/api.php?year=2014&p=stock_day&fq=&info=k_{0}_{1}";
                         string urltype = string.Empty;
-                        string code = dr["stb_code"].ToString();
-                        string name = dr["stb_name"].ToString();
+                        string code = dicEntry.Key; ;
+                        string name = dicEntry.Value;
                         LogHelper.InfoLog(string.Format("Line:{0}  code:{1},date:{2} starting ", count, code, name), "DayKLog");
                         char firstchar = code[0];
                         if (firstchar == '6' || firstchar == '9')
@@ -303,27 +312,25 @@ namespace BLL
                             {
                                 MatchCollection mc = reg.Matches(getstr);
                                 double? lastEndPrice = 0;
-                                bool bfirstLine = true;
+                                bool bCodeExist = false;
                                 string maxdate = string.Empty;
-                                //处理在表中已有数据的情况下，将表中最后一天的收盘价当作第一条新数据的lastprice
                                 if (codedateHt.Contains(code))
                                 {
-                                    if (codedateHt[code] == null || codedateHt[code].ToString().Split('|').Length != 2)
-                                    {
-                                        LogHelper.ErrorLog(string.Format("codedateHt value error  codevalue is:{0}", codedateHt[code].ToString()), "DayKLog");
-                                        return;
-                                    }
-                                    maxdate = codedateHt[code].ToString().Split('|')[0];
-                                    lastEndPrice = Convert.ToDouble(codedateHt[code].ToString().Split('|')[1]);                                   
+                                    bCodeExist = true;
+                                    maxdate = codedateHt[code].ToString();
                                 }
                                 foreach (Match mi in mc)
                                 {
-                                    if(codedateHt.Contains(code))
-                                    {   
-                                        if (string.Compare(mi.Groups[2].ToString(), maxdate) <= 0)
-                                        {
-                                            bfirstLine = false;
-                                            continue;                                            
+                                    if (bCodeExist)
+                                    {
+                                        if (string.Compare(mi.Groups[2].ToString(), maxdate) < 0)
+                                        {                                            
+                                            continue;
+                                        }
+                                        else if (string.Compare(mi.Groups[2].ToString(), maxdate) == 0)
+                                        {                                            
+                                            lastEndPrice = Convert.ToDouble(mi.Groups[1].ToString().Split(',')[4]);
+                                            continue;
                                         }
                                     }                                    
                                     string data = mi.Groups[1].ToString();
@@ -338,28 +345,39 @@ namespace BLL
                                     dflowBean.Endprice = Convert.ToDouble(strArr[4]);
                                     dflowBean.Tradenum = Convert.ToDouble(strArr[5]);
                                     dflowBean.Summoney = Convert.ToDouble(strArr[6]);
-                                    if (!bfirstLine)
+                                    if (lastEndPrice < 0.001)
+                                    {
+                                        dflowBean.Lastprice = dflowBean.Endprice;
+                                    }
+                                    else
                                     {
                                         dflowBean.Lastprice = lastEndPrice;
-                                    }
+                                    }  
                                     beanList.Add(dflowBean);
-                                    lastEndPrice = dflowBean.Endprice;
-                                    bfirstLine = false;
+                                    lastEndPrice = dflowBean.Endprice;                                    
                                 }
                                 string eMsg = string.Empty;
-                                if (beanList.Count > 0)
-                                {
-                                    SqlHelper.InsertByModel(beanList, out eMsg);
-                                }                                
-                                LogHelper.InfoLog(string.Format("code:{0} ending ", code), "DayKLog");
+                                SqlHelper.InsertByModel(beanList, out eMsg);
+                                                               
+                                //LogHelper.InfoLog(string.Format("code:{0} ending ", code), "DayKLog");
                             }
                             catch (System.Exception ex)
                             {
                                 LogHelper.ErrorLog(string.Format("error  Code:{0},ExceptMsg:{1}", code, ex.Message), "DayKLog");
                             }
                         }
-                    });
-                } 
+                        else
+                        {
+                            string eMsg = string.Empty;
+                            NeterrBean netbean = new NeterrBean();
+                            netbean.Id = Helper.getJrnNo();
+                            netbean.Code = code;
+                            netbean.Name = name;
+                            netbean.Type = "HISDAYLINE";
+                            netbean.Remark = url;
+                            SqlHelper.InsertByModel(netbean, out eMsg);
+                        }
+                    });                 
                 
             }
             catch (Exception ex)
@@ -518,7 +536,7 @@ namespace BLL
             {
                 DBFactory dbFactory = DBFactory.GetDBFactoryInstance();
                 DBOperator dbAccess = dbFactory.GetLocalDBOperator();
-                string sqlStr = @"select dfl_code,dfl_endprice,MAX(dfl_date) as maxdate from dayflow group by dfl_code";
+                string sqlStr = @"select dfl_code,MAX(dfl_date) as maxdate from dayflow group by dfl_code";
                 DataSet ds = dbAccess.ExecuteQuerry(sqlStr);
                 
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -527,7 +545,7 @@ namespace BLL
                     {
                         if (!string.IsNullOrEmpty(dr["dfl_code"].ToString()) && !string.IsNullOrEmpty(dr["maxdate"].ToString()))
                         {
-                            codedateHt.Add(dr["dfl_code"].ToString(), dr["maxdate"].ToString() + "|" + dr["dfl_endprice"].ToString());
+                            codedateHt.Add(dr["dfl_code"].ToString(), dr["maxdate"].ToString());
                         }
                     }
                 }
@@ -540,6 +558,181 @@ namespace BLL
             return true;
         }
 
+        /// <summary>
+        /// 从同花顺上获取所有的周线历史数据
+        /// </summary>
+        /// <param name="errMsg"></param>
+        /// <returns></returns>
+        public bool getWeekHistory(out string errMsg)
+        {
+            errMsg = string.Empty;
+            string eMsg = string.Empty;
+            try
+            {
+                LogHelper.InfoLog("week line starting", "DayKLog");
+                Hashtable codedateHt = new Hashtable();
+                if (!getNewestDateForWeekLine(out codedateHt))
+                {
+                    return false;
+                }                
+                int count = 0;
+                Regex reg = new Regex(@"(?:=|\|)((\d+).*?)(?=\|)");
+                Dictionary<string, string> codeDic = StockHelper.getAllStockCode();
+                Parallel.ForEach(codeDic, (dicEntry) =>
+                {
+                    count++;
+                    //form.SetHisBarValue(100 * count++ / ds.Tables[0].Rows.Count);
+                    string urlformat = @"http://qd.10jqka.com.cn/api.php?year=2014&p=stock_week&fq=&info=k_{0}_{1}";
+                    string urltype = string.Empty;
+                    string code = dicEntry.Key; ;
+                    string name = dicEntry.Value;
+                    LogHelper.InfoLog(string.Format("Line:{0}  code:{1},date:{2} starting ", count, code, name), "DayKLog");
+                    char firstchar = code[0];
+                    if (firstchar == '6' || firstchar == '9')
+                    {
+                        urltype = "sh";
+                    }
+                    else if (firstchar == '0' || firstchar == '2' || firstchar == '3')
+                    {
+                        urltype = "sz";
+                    }
+                    else
+                    {
+                        LogHelper.ErrorLog("urlcodetype is not sh and sz.  " + code, "DayKLog");
+                        return;
+                    }
+                    string getstr = string.Empty;
+                    string url = string.Format(urlformat, urltype, code);
+                    if (GetMothed(url, out getstr))
+                    {
+                        List<WeekflowBean> beanList = new List<WeekflowBean>();
+                        try
+                        {
+                            MatchCollection mc = reg.Matches(getstr);
+                            double? lastEndPrice = 0;
+                            bool bCodeExist = false;
+                            string maxdate = string.Empty;
+                            if (codedateHt.Contains(code))
+                            {
+                                bCodeExist = true;
+                                maxdate = codedateHt[code].ToString();
+                            }
+                            foreach (Match mi in mc)
+                            {
+                                if (bCodeExist)
+                                {
+                                    if (string.Compare(mi.Groups[2].ToString(), maxdate) < 0)
+                                    {
+                                        continue;
+                                    }
+                                    else if (string.Compare(mi.Groups[2].ToString(), maxdate) == 0)
+                                    {//周线数据如果相等需要更新表中最后一周的数据
+                                        
+                                        string tdata = mi.Groups[1].ToString();
+                                        string[] tstrArr = tdata.Split(',');
+                                        WeekflowBean twflowBean = new WeekflowBean();
+                                        twflowBean.Code = code;
+                                        twflowBean.Date = tstrArr[0];
+                                        twflowBean.Name = name;
+                                        twflowBean.Startprice = Convert.ToDouble(tstrArr[1]);
+                                        twflowBean.Hightprice = Convert.ToDouble(tstrArr[2]);
+                                        twflowBean.Lowprice = Convert.ToDouble(tstrArr[3]);
+                                        twflowBean.Endprice = Convert.ToDouble(tstrArr[4]);
+                                        twflowBean.Tradenum = Convert.ToDouble(tstrArr[5]);
+                                        twflowBean.Summoney = Convert.ToDouble(tstrArr[6]);
+                                        lastEndPrice = twflowBean.Endprice;
+                                        SqlHelper.UpdateByModel(twflowBean, out eMsg);                                        
+                                        continue;
+                                    }
+                                }
+                                string data = mi.Groups[1].ToString();
+                                string[] strArr = data.Split(',');
+                                WeekflowBean wflowBean = new WeekflowBean();
+                                wflowBean.Code = code;
+                                wflowBean.Date = strArr[0];
+                                wflowBean.Name = name;
+                                wflowBean.Startprice = Convert.ToDouble(strArr[1]);
+                                wflowBean.Hightprice = Convert.ToDouble(strArr[2]);
+                                wflowBean.Lowprice = Convert.ToDouble(strArr[3]);
+                                wflowBean.Endprice = Convert.ToDouble(strArr[4]);
+                                wflowBean.Tradenum = Convert.ToDouble(strArr[5]);
+                                wflowBean.Summoney = Convert.ToDouble(strArr[6]);
+                                if (lastEndPrice < 0.001)
+                                {
+                                    wflowBean.Lastprice = wflowBean.Endprice;
+                                }
+                                else
+                                {
+                                    wflowBean.Lastprice = lastEndPrice;
+                                }                                
+                                beanList.Add(wflowBean);
+                                lastEndPrice = wflowBean.Endprice;
+                            }
+                            
+                            SqlHelper.InsertByModel(beanList, out eMsg);
+                            
+                            //LogHelper.InfoLog(string.Format("code:{0} ending ", code), "DayKLog");
+                        }
+                        catch (System.Exception ex)
+                        {
+                            LogHelper.ErrorLog(string.Format("error  Code:{0},ExceptMsg:{1}", code, ex.Message), "DayKLog");
+                        }
+                    }
+                    else
+                    {                        
+                        NeterrBean netbean = new NeterrBean();
+                        netbean.Id = Helper.getJrnNo();
+                        netbean.Code = code;
+                        netbean.Name = name;
+                        netbean.Type = "HISWEEKLINE";
+                        netbean.Remark = url;
+                        SqlHelper.InsertByModel(netbean, out eMsg);
+                    }
+                });
+
+            }
+            catch (Exception ex)
+            {
+                string errfile = new System.Diagnostics.StackFrame(true).GetFileName().ToString();
+                string errline = new System.Diagnostics.StackFrame(true).GetFileLineNumber().ToString();
+                errMsg = errfile + "  " + errline + "  " + ex.StackTrace;
+                return false;
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// 获取周线表中的每个股票代码对应的最新日期，结果在hashtable中
+        /// </summary>
+        /// <param name="codedateHt"></param>
+        /// <returns></returns>
+        public bool getNewestDateForWeekLine(out Hashtable codedateHt)
+        {
+            codedateHt = new Hashtable();
+            try
+            {
+                DBFactory dbFactory = DBFactory.GetDBFactoryInstance();
+                DBOperator dbAccess = dbFactory.GetLocalDBOperator();
+                string sqlStr = @"select wfl_code,MAX(wfl_date) as maxdate from weekflow group by wfl_code";
+                DataSet ds = dbAccess.ExecuteQuerry(sqlStr);
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow dr in ds.Tables[0].Rows)
+                    {
+                        if (!string.IsNullOrEmpty(dr["wfl_code"].ToString()) && !string.IsNullOrEmpty(dr["maxdate"].ToString()))
+                        {
+                            codedateHt.Add(dr["dfl_wode"].ToString(), dr["maxdate"].ToString());
+                        }
+                    }
+                }
+            }
+            catch (System.Exception ex)
+            {
+                LogHelper.ErrorLog("getNewestDateForWeekLine error,errMsg:" + ex.StackTrace);
+                return false;
+            }
+            return true;
+        }
         /// <summary>
         /// 从同花顺上获取分时数据
         /// </summary>

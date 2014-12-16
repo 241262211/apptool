@@ -18,6 +18,8 @@ using DAL;
 using Model;
 using System.Xml;
 using System.Web;
+using System.Collections.Concurrent;
+using System.Threading.Tasks;
 
 namespace BLL
 {
@@ -1059,7 +1061,9 @@ namespace BLL
         {
             string strResult = "0";
             DbBeanOutArr = new ArrayList();
-
+            //ConcurrentQueue<List<DbBean>> queue = new ConcurrentQueue<List<DbBean>>();
+            ConcurrentDictionary<int,List<DbBean>> dic = new ConcurrentDictionary<int,List<DbBean>>();
+            //dic.OrderBy(item => item.Key);
             try
             {
 
@@ -1103,17 +1107,19 @@ namespace BLL
                 Tables ts = r.GetAllTables();
                 int realDocCellClm = 0;
 
-                // 从1开始的，注意
-                for (int i = 1; i <= ts.Count; i++)
-                {
 
+                // 从1开始的，注意
+                Parallel.For(1, ts.Count + 1, (i) =>
+                //for (int i = 1; i <= ts.Count; i++)
+                {
+                    List<DbBean> beanList= new List<DbBean>();
                     Table t1 = ts[i];
 
                     realDocCellClm = t1.Columns.Count;
 
                     if (realDocCellClm != strctable_columnNum)
                     {
-                        continue;
+                        return;
                     }
 
                     int nRowIndex = 1;
@@ -1124,7 +1130,7 @@ namespace BLL
                     //string strLine2 = r.GetLinePreTable2(t2);
                     if (string.IsNullOrEmpty(strLine))
                     {
-                        continue;
+                        return;
                     }
                     string strTableEnName = string.Empty;
                     string strTableCnName = string.Empty;
@@ -1132,7 +1138,7 @@ namespace BLL
                     {
                         if (!GetName(strLine, out strTableEnName, out strTableCnName))
                         {
-                            continue;
+                            return;
                         }
                     }
                     else
@@ -1172,27 +1178,26 @@ namespace BLL
                         }
                         else
                         {
-
-                            continue;
+                            return;
                         }
                     }
                     if (string.IsNullOrEmpty(strTableEnName))
                     {
-                        continue;
+                        return;
                     }
-
+                    strTableEnName = strTableEnName.Trim();
+                    strTableCnName = stringop.GetRegulerTableName(strTableCnName).Trim();
                     //读取字段名
                     //int num = 1;
                     for (int j = strcTable_start_row + 1; j <= t1.Rows.Count; j++)
                     {
                         DbBean DbBeanOut = new DbBean();
-                        DbBeanOut.TableEnName = strTableEnName.Trim();
-                        DbBeanOut.TableCnName = stringop.GetRegulerTableName(strTableCnName).Trim();
+                        DbBeanOut.TableEnName = strTableEnName;
+                        DbBeanOut.TableCnName = strTableCnName;
                         if (strTableCnName.IndexOf('.') > 0)
                         {
                             DbBeanOut.Bak = strTableCnName.Split('.')[0];
                         }
-                        
 
                         //英文名
                         if (fieldEnName_index != -1)
@@ -1232,81 +1237,6 @@ namespace BLL
                             DbBeanOut.FieldType = GetText(t1.Cell(j, fieldType_index));
                         }
 
-                        /*
-                        //序号
-                        DbBeanOut.FieldNum = num.ToString();
-                        num++;
-
-                        //是否主键
-                        if (ispk_index != -1)
-                        {
-                            DbBeanOut.IsPk = GetText(t1.Cell(j, ispk_index));
-                        }
-
-                        //字段类型
-                        if (fieldType_index != -1)
-                        {
-                            DbBeanOut.FieldType = GetText(t1.Cell(j, fieldType_index));
-                        }
-                        string len = string.Empty;
-                        if (DbBeanOut.FieldType.IndexOf('(') > 0)
-                        {
-                            
-                            string leneelse = DbBeanOut.FieldType.Split('(')[1];
-                            DbBeanOut.FieldType = DbBeanOut.FieldType.Split('(')[0];
-                            if (leneelse.IndexOf(')') > 0)
-                            {
-                                len = leneelse.Split(')')[0];
-                            }
-                            if (DbBeanOut.FieldType == "DECIMAL" || DbBeanOut.FieldType == "decimal" || DbBeanOut.FieldType == "numeric" || DbBeanOut.FieldType == "NUMERIC" || DbBeanOut.FieldType == "NUMBER")
-                            {
-                                if(len.IndexOf(',') > 0)
-                                {
-                                    string decimalLen = len.Split(',')[1];
-                                    len = len.Split(',')[0];
-                                    DbBeanOut.DecimalLen = decimalLen;
-                                }
-                            }
-                            if (DbBeanOut.FieldType == "INTEGER" || DbBeanOut.FieldType == "integer" || DbBeanOut.FieldType == "int")
-                            {
-                                len = "";
-                            }
-
-                        }
-
-                        //字段样式
-                        if (fieldStyle_index != -1)
-                        {
-                            DbBeanOut.FieldStyle = GetText(t1.Cell(j, fieldStyle_index));
-                        }
-                        //字段长度
-                        if (fieldLen_index != -1)
-                        {
-                            DbBeanOut.FieldStyle = GetText(t1.Cell(j, fieldLen_index));
-                        }
-                        else
-                        {
-                            DbBeanOut.FieldLen = len;
-                        }
-                        
-
-                        //是否为空
-                        if (isNull_index != -1)
-                        {
-                            DbBeanOut.IsNull = GetText(t1.Cell(j, isNull_index));
-                        }
-                        //小数点长度
-                        if (decimalLen_index != -1)
-                        {
-                            DbBeanOut.Bak = GetText(t1.Cell(j, decimalLen_index));
-                        }
-
-                        //取值范围
-                        if (valRange_index != -1)
-                        {
-                            DbBeanOut.Bak = GetText(t1.Cell(j, valRange_index));
-                        }
-                         */
                         //备注说明
                         if (bak_index != -1)
                         {
@@ -1319,14 +1249,29 @@ namespace BLL
                                 continue;
                             }
                         }
-                        DbBeanOutArr.Add(DbBeanOut);
+                        //LogHelper.InfoLog(DbBeanOut.FieldCnName);
+                        beanList.Add(DbBeanOut);
                     }
-
-
+                    //queue.Enqueue(beanList);
+                    dic.TryAdd(i, beanList);
+                });
+                dic.OrderBy(item => item.Key);                
+                foreach (var pair in dic)
+                {
+                    List<DbBean> tmpList = pair.Value;
+                    foreach (DbBean bean in tmpList)
+                    {
+                        DbBeanOutArr.Add(bean);
+                    }
                 }
-
+                //while (queue.TryDequeue(out tmpList))
+                //{
+                //    foreach (DbBean bean in tmpList)
+                //    {
+                //        DbBeanOutArr.Add(bean);
+                //    }
+                //}
                 return "0";
-
             }
             catch (Exception e)
             {
@@ -1350,6 +1295,7 @@ namespace BLL
         {
             string strResult = "0";
             DbBeanOutArr = new ArrayList();
+            
 
             try
             {

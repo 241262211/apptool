@@ -1,4 +1,8 @@
-2014-12-11 20:32:07,641 [21] ERROR DayKLog [(null)] - urlcodetype is not sh and sz.  430289
-2014-12-11 20:34:24,084 [25] ERROR DayKLog [(null)] - urlcodetype is not sh and sz.  830828
-2014-12-11 20:37:42,842 [92] ERROR DayKLog [(null)] - urlcodetype is not sh and sz.  430056
-2014-12-11 20:37:54,102 [27] ERROR DayKLog [(null)] - urlcodetype is not sh and sz.  430301
+2014-12-11 22:18:06,026 [19] ERROR DayKLog [(null)] - urlcodetype is not sh and sz.  430289
+2014-12-11 22:19:07,974 [20] ERROR DayKLog [(null)] - urlcodetype is not sh and sz.  830828
+2014-12-11 22:23:27,703 [100] ERROR DayKLog [(null)] - urlcodetype is not sh and sz.  430301
+2014-12-11 22:23:40,284 [46] ERROR DayKLog [(null)] - urlcodetype is not sh and sz.  430056
+2014-12-11 22:38:54,162 [11] ERROR DayKLog [(null)] - urlcodetype is not sh and sz.  430289
+2014-12-11 22:39:47,927 [16] ERROR DayKLog [(null)] - urlcodetype is not sh and sz.  830828
+2014-12-11 22:42:21,082 [17] ERROR DayKLog [(null)] - urlcodetype is not sh and sz.  430056
+2014-12-11 22:42:26,476 [26] ERROR DayKLog [(null)] - urlcodetype is not sh and sz.  430301

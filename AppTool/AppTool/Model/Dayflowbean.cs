@@ -48,18 +48,6 @@ namespace Model
         }
 
         /// <summary>
-        /// 当前价格
-        /// <summary>
-        private double? _price;
-
-        [DataFieldAttribute("dfl_price", "double", 0, false)]
-        public double? Price
-        {
-            get { return _price; }
-            set { _price = value; }
-        }
-
-        /// <summary>
         /// 今日开盘价
         /// <summary>
         private double? _startprice;
@@ -144,66 +132,6 @@ namespace Model
         }
 
         /// <summary>
-        /// 买量
-        /// <summary>
-        private double? _buysum;
-
-        [DataFieldAttribute("dfl_buysum", "double", 0, false)]
-        public double? Buysum
-        {
-            get { return _buysum; }
-            set { _buysum = value; }
-        }
-
-        /// <summary>
-        /// 卖量
-        /// <summary>
-        private double? _salesum;
-
-        [DataFieldAttribute("dfl_salesum", "double", 0, false)]
-        public double? Salesum
-        {
-            get { return _salesum; }
-            set { _salesum = value; }
-        }
-
-        /// <summary>
-        /// 大单
-        /// <summary>
-        private double? _lsingle;
-
-        [DataFieldAttribute("dfl_lsingle", "double", 0, false)]
-        public double? Lsingle
-        {
-            get { return _lsingle; }
-            set { _lsingle = value; }
-        }
-
-        /// <summary>
-        /// 中单
-        /// <summary>
-        private double? _msingle;
-
-        [DataFieldAttribute("dfl_msingle", "double", 0, false)]
-        public double? Msingle
-        {
-            get { return _msingle; }
-            set { _msingle = value; }
-        }
-
-        /// <summary>
-        /// 小单
-        /// <summary>
-        private double? _ssingle;
-
-        [DataFieldAttribute("dfl_ssingle", "double", 0, false)]
-        public double? Ssingle
-        {
-            get { return _ssingle; }
-            set { _ssingle = value; }
-        }
-
-        /// <summary>
         /// 流入资金
         /// <summary>
         private double? _insum;
@@ -228,31 +156,31 @@ namespace Model
         }
 
         /// <summary>
-        /// MACD_DIFF
+        /// MACD_NEAREMA
         /// <summary>
-        private double? _macdema9;
+        private double? _nearema;
 
-        [DataFieldAttribute("dfl_macdema9", "double", 0, false)]
-        public double? Macdema9
+        [DataFieldAttribute("dfl_nearema", "double", 0, false)]
+        public double? Nearema
         {
-            get { return _macdema9; }
-            set { _macdema9 = value; }
+            get { return _nearema; }
+            set { _nearema = value; }
+        }
+
+        /// <summary>
+        /// MACD_FAREMA
+        /// <summary>
+        private double? _farema;
+
+        [DataFieldAttribute("dfl_farema", "double", 0, false)]
+        public double? Farema
+        {
+            get { return _farema; }
+            set { _farema = value; }
         }
 
         /// <summary>
         /// MACD_DEA
-        /// <summary>
-        private double? _macdema26;
-
-        [DataFieldAttribute("dfl_macdema26", "double", 0, false)]
-        public double? Macdema26
-        {
-            get { return _macdema26; }
-            set { _macdema26 = value; }
-        }
-
-        /// <summary>
-        /// MACD
         /// <summary>
         private double? _macddea;
 
@@ -264,39 +192,51 @@ namespace Model
         }
 
         /// <summary>
+        /// MACD_BAR
+        /// <summary>
+        private double? _macdbar;
+
+        [DataFieldAttribute("dfl_macdbar", "double", 0, false)]
+        public double? Macdbar
+        {
+            get { return _macdbar; }
+            set { _macdbar = value; }
+        }
+
+        /// <summary>
         /// KJD_KLINE
         /// <summary>
-        private double? _kjdkline;
+        private double? _kdjkline;
 
-        [DataFieldAttribute("dfl_kjdkline", "double", 0, false)]
-        public double? Kjdkline
+        [DataFieldAttribute("dfl_kdjkline", "double", 0, false)]
+        public double? Kdjkline
         {
-            get { return _kjdkline; }
-            set { _kjdkline = value; }
+            get { return _kdjkline; }
+            set { _kdjkline = value; }
         }
 
         /// <summary>
         /// KJD_JLINE
         /// <summary>
-        private double? _djdjline;
+        private double? _kdjjline;
 
-        [DataFieldAttribute("dfl_djdjline", "double", 0, false)]
-        public double? Djdjline
+        [DataFieldAttribute("dfl_kdjjline", "double", 0, false)]
+        public double? Kdjjline
         {
-            get { return _djdjline; }
-            set { _djdjline = value; }
+            get { return _kdjjline; }
+            set { _kdjjline = value; }
         }
 
         /// <summary>
         /// KJD_DLINE
         /// <summary>
-        private double? _kjddline;
+        private double? _kdjdline;
 
-        [DataFieldAttribute("dfl_kjddline", "double", 0, false)]
-        public double? Kjddline
+        [DataFieldAttribute("dfl_kdjdline", "double", 0, false)]
+        public double? Kdjdline
         {
-            get { return _kjddline; }
-            set { _kjddline = value; }
+            get { return _kdjdline; }
+            set { _kdjdline = value; }
         }
 
         /// <summary>

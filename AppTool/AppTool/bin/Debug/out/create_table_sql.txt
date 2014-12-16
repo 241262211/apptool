@@ -102,7 +102,6 @@ CREATE TABLE DAYFLOW(
 dfl_code   char(10)    NOT NULL   ,
 dfl_date   char(10)    NOT NULL   ,
 dfl_name   varchar(40)    NULL   ,
-dfl_price   double    NULL   ,
 dfl_startprice   double    NULL   ,
 dfl_lastprice   double    NULL   ,
 dfl_hightprice   double    NULL   ,
@@ -110,19 +109,15 @@ dfl_lowprice   double    NULL   ,
 dfl_endprice   double    NULL   ,
 dfl_tradenum   double    NULL   ,
 dfl_summoney   double    NULL   ,
-dfl_buysum   double    NULL   ,
-dfl_salesum   double    NULL   ,
-dfl_lsingle   double    NULL   ,
-dfl_msingle   double    NULL   ,
-dfl_ssingle   double    NULL   ,
 dfl_insum   double    NULL   ,
 dfl_outsum   double    NULL   ,
-dfl_macddiff   double    NULL   ,
+dfl_nearema   double    NULL   ,
+dfl_farema   double    NULL   ,
 dfl_macddea   double    NULL   ,
-dfl_macd   double    NULL   ,
-dfl_kjdkline   double    NULL   ,
-dfl_djdjline   double    NULL   ,
-dfl_kjddline   double    NULL   ,
+dfl_macdbar   double    NULL   ,
+dfl_kdjkline   double    NULL   ,
+dfl_kdjjline   double    NULL   ,
+dfl_kdjdline   double    NULL   ,
 dfl_bollsuper   double    NULL   ,
 dfl_bollmiddle   double    NULL   ,
 dfl_bolllower   double    NULL   ,
@@ -133,7 +128,40 @@ dfl_bak3   varchar(200)    NULL   ,
 primary key(dfl_code,dfl_date)
 ) ENGINE = MyISAM DEFAULT CHARACTER SET utf8;
  
----7  分线表
+---7  周线表
+---WEEKFLOW
+DROP TABLE IF EXISTS `WEEKFLOW`;
+CREATE TABLE WEEKFLOW( 
+wfl_code   char(10)    NOT NULL   ,
+wfl_date   char(10)    NOT NULL   ,
+wfl_name   varchar(40)    NULL   ,
+wfl_startprice   double    NULL   ,
+wfl_lastprice   double    NULL   ,
+wfl_hightprice   double    NULL   ,
+wfl_lowprice   double    NULL   ,
+wfl_endprice   double    NULL   ,
+wfl_tradenum   double    NULL   ,
+wfl_summoney   double    NULL   ,
+wfl_insum   double    NULL   ,
+wfl_outsum   double    NULL   ,
+wfl_nearema   double    NULL   ,
+wfl_farema   double    NULL   ,
+wfl_macddea   double    NULL   ,
+wfl_macdbar   double    NULL   ,
+wfl_kdjkline   double    NULL   ,
+wfl_kdjjline   double    NULL   ,
+wfl_kdjdline   double    NULL   ,
+wfl_bollsuper   double    NULL   ,
+wfl_bollmiddle   double    NULL   ,
+wfl_bolllower   double    NULL   ,
+wfl_updatetime   varchar(60)    NULL   ,
+wfl_bak1   varchar(20)    NULL   ,
+wfl_bak2   varchar(60)    NULL   ,
+wfl_bak3   varchar(200)    NULL   ,
+primary key(wfl_code,wfl_date)
+) ENGINE = MyISAM DEFAULT CHARACTER SET utf8;
+ 
+---8  分线表
 ---MIN5FLOW
 DROP TABLE IF EXISTS `MIN5FLOW`;
 CREATE TABLE MIN5FLOW( 
@@ -151,9 +179,9 @@ m5f_summoney   double    NULL   ,
 m5f_macddiff   double    NULL   ,
 m5f_macddea   double    NULL   ,
 m5f_macd   double    NULL   ,
-m5f_kjdkline   double    NULL   ,
-m5f_djdjline   double    NULL   ,
-m5f_kjddline   double    NULL   ,
+m5f_kdjkline   double    NULL   ,
+m5f_kdjjline   double    NULL   ,
+m5f_kdjdline   double    NULL   ,
 m5f_bollsuper   double    NULL   ,
 m5f_bollmiddle   double    NULL   ,
 m5f_bolllower   double    NULL   ,
@@ -161,4 +189,37 @@ m5f_bak1   varchar(20)    NULL   ,
 m5f_bak2   varchar(60)    NULL   ,
 m5f_bak3   varchar(200)    NULL   ,
 primary key(m5f_code,m5f_date,m5f_time)
+) ENGINE = MyISAM DEFAULT CHARACTER SET utf8;
+ 
+---9  指标分析表
+---INDEXANALYS
+DROP TABLE IF EXISTS `INDEXANALYS`;
+CREATE TABLE INDEXANALYS( 
+ina_id   char(30)    NOT NULL   ,
+ina_code   char(10)    NULL   ,
+ina_date   char(10)    NULL   ,
+ina_time   char(10)    NULL   ,
+ina_name   varchar(40)    NULL   ,
+ina_type   char(10)    NULL   ,
+ina_subtype   char(10)    NULL   ,
+ina_flag   char(10)    NULL   ,
+ina_markprice   double    NULL   ,
+ina_todayincrease   double    NULL   ,
+ina_nextincrease   double    NULL   ,
+ina_day5increase   double    NULL   ,
+ina_day10increase   double    NULL   ,
+primary key(ina_id)
+) ENGINE = MyISAM DEFAULT CHARACTER SET utf8;
+ 
+---10  网络错误重提表
+---NETERR
+DROP TABLE IF EXISTS `NETERR`;
+CREATE TABLE NETERR( 
+nte_id   char(30)    NOT NULL   ,
+nte_code   char(10)    NULL   ,
+nte_name   varchar(40)    NULL   ,
+nte_date   char(10)    NULL   ,
+nte_type   varchar(40)    NULL   ,
+nte_remark   varchar(200)    NULL   ,
+primary key(nte_id)
 )  ENGINE = MyISAM DEFAULT CHARACTER SET utf8;

@@ -115,6 +115,8 @@
     <Compile Include="BLL\JsCombine.cs" />
     <Compile Include="BLL\PackParse.cs" />
     <Compile Include="BLL\StockBll.cs" />
+    <Compile Include="BLL\StockHelper.cs" />
+    <Compile Include="BLL\StockIndex.cs" />
     <Compile Include="DAL\DBFactory.cs" />
     <Compile Include="DAL\DBOperator.cs" />
     <Compile Include="DAL\DBSource.cs" />
@@ -122,6 +124,7 @@
     <Compile Include="DAL\DSOp.cs" />
     <Compile Include="DAL\ExcelOp.cs" />
     <Compile Include="DAL\FileOp.cs" />
+    <Compile Include="DAL\Helper.cs" />
     <Compile Include="DAL\HttpOp.cs" />
     <Compile Include="DAL\init.cs" />
     <Compile Include="DAL\LogHelper.cs" />
@@ -147,10 +150,13 @@
     <Compile Include="Model\common\NoSortHashtable.cs" />
     <Compile Include="Model\Dayflowbean.cs" />
     <Compile Include="Model\Dbbean.cs" />
+    <Compile Include="Model\IndexanalysBean.cs" />
     <Compile Include="Model\log\LogBean.cs" />
     <Compile Include="Model\log\LogNumBean.cs" />
     <Compile Include="Model\Min5flowBean.cs" />
+    <Compile Include="Model\NeterrBean.cs" />
     <Compile Include="Model\StockbaseBean.cs" />
+    <Compile Include="Model\Weekflow.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -175,7 +181,9 @@
     <None Include="INI\DB.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="log4net.config" />
+    <None Include="log4net.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -559,6 +559,89 @@ namespace AppTool
             {
                 MessageBox.Show("出错了"+ex.Message);
             }
+        }
+
+        private void DayMACD_Click(object sender, EventArgs e)
+        {
+            string errMsg = string.Empty;
+            try
+            {
+                if (new StockIndex().IndexMACD())
+                {
+                    MessageBox.Show("MACD计算完成");
+                }
+                else
+                {
+                    MessageBox.Show("MACD计算出错了");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("出错了" + ex.Message);
+            }
+        }
+
+        private void DayMACDAnalysis_Click(object sender, EventArgs e)
+        {
+            string errMsg = string.Empty;
+            try
+            {
+                if (new StockIndex().MACDAnalysis())
+                {
+                    MessageBox.Show("MACD计算完成");
+                }
+                else
+                {
+                    MessageBox.Show("MACD计算出错了");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("出错了" + ex.Message);
+            }
+        }
+
+        private void DayKDJCalc_Click(object sender, EventArgs e)
+        {
+            string errMsg = string.Empty;
+            try
+            {
+                if (new StockIndex().IndexKDJ())
+                {
+                    MessageBox.Show("KDJ计算完成");
+                }
+                else
+                {
+                    MessageBox.Show("KDJ计算出错了");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("出错了" + ex.Message);
+            }
+        }
+
+        private void WeekHisLine_Click(object sender, EventArgs e)
+        {
+            string errMsg = string.Empty;
+            try
+            {
+                if (!new StockBll().getWeekHistory(out errMsg))
+                {
+                    MessageBox.Show(errMsg);
+                }
+                else
+                {
+                    MessageBox.Show("WeekHistory数据已获取完成");
+                }
+            }
+            catch
+            {
+                MessageBox.Show("出错了");
+            }
         }        
     }
 

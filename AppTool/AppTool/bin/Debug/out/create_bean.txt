@@ -808,18 +808,6 @@ public class DayflowBean
    }
    
   /// <summary>
-  /// 当前价格
-  /// <summary>
-  private double? _price;
-   
-  [DataFieldAttribute("dfl_price", "double",0,false)]
-  public double? Price
-  {
-   get { return _price; }
-   set { _price = value; }
-   }
-   
-  /// <summary>
   /// 今日开盘价
   /// <summary>
   private double? _startprice;
@@ -904,66 +892,6 @@ public class DayflowBean
    }
    
   /// <summary>
-  /// 买量
-  /// <summary>
-  private double? _buysum;
-   
-  [DataFieldAttribute("dfl_buysum", "double",0,false)]
-  public double? Buysum
-  {
-   get { return _buysum; }
-   set { _buysum = value; }
-   }
-   
-  /// <summary>
-  /// 卖量
-  /// <summary>
-  private double? _salesum;
-   
-  [DataFieldAttribute("dfl_salesum", "double",0,false)]
-  public double? Salesum
-  {
-   get { return _salesum; }
-   set { _salesum = value; }
-   }
-   
-  /// <summary>
-  /// 大单
-  /// <summary>
-  private double? _lsingle;
-   
-  [DataFieldAttribute("dfl_lsingle", "double",0,false)]
-  public double? Lsingle
-  {
-   get { return _lsingle; }
-   set { _lsingle = value; }
-   }
-   
-  /// <summary>
-  /// 中单
-  /// <summary>
-  private double? _msingle;
-   
-  [DataFieldAttribute("dfl_msingle", "double",0,false)]
-  public double? Msingle
-  {
-   get { return _msingle; }
-   set { _msingle = value; }
-   }
-   
-  /// <summary>
-  /// 小单
-  /// <summary>
-  private double? _ssingle;
-   
-  [DataFieldAttribute("dfl_ssingle", "double",0,false)]
-  public double? Ssingle
-  {
-   get { return _ssingle; }
-   set { _ssingle = value; }
-   }
-   
-  /// <summary>
   /// 流入资金
   /// <summary>
   private double? _insum;
@@ -988,15 +916,27 @@ public class DayflowBean
    }
    
   /// <summary>
-  /// MACD_DIFF
+  /// MACD_NEAREMA
   /// <summary>
-  private double? _macddiff;
+  private double? _nearema;
    
-  [DataFieldAttribute("dfl_macddiff", "double",0,false)]
-  public double? Macddiff
+  [DataFieldAttribute("dfl_nearema", "double",0,false)]
+  public double? Nearema
   {
-   get { return _macddiff; }
-   set { _macddiff = value; }
+   get { return _nearema; }
+   set { _nearema = value; }
+   }
+   
+  /// <summary>
+  /// MACD_FAREMA
+  /// <summary>
+  private double? _farema;
+   
+  [DataFieldAttribute("dfl_farema", "double",0,false)]
+  public double? Farema
+  {
+   get { return _farema; }
+   set { _farema = value; }
    }
    
   /// <summary>
@@ -1012,51 +952,51 @@ public class DayflowBean
    }
    
   /// <summary>
-  /// MACD
+  /// MACD_BAR
   /// <summary>
-  private double? _macd;
+  private double? _macdbar;
    
-  [DataFieldAttribute("dfl_macd", "double",0,false)]
-  public double? Macd
+  [DataFieldAttribute("dfl_macdbar", "double",0,false)]
+  public double? Macdbar
   {
-   get { return _macd; }
-   set { _macd = value; }
+   get { return _macdbar; }
+   set { _macdbar = value; }
    }
    
   /// <summary>
   /// KJD_KLINE
   /// <summary>
-  private double? _kjdkline;
+  private double? _kdjkline;
    
-  [DataFieldAttribute("dfl_kjdkline", "double",0,false)]
-  public double? Kjdkline
+  [DataFieldAttribute("dfl_kdjkline", "double",0,false)]
+  public double? Kdjkline
   {
-   get { return _kjdkline; }
-   set { _kjdkline = value; }
+   get { return _kdjkline; }
+   set { _kdjkline = value; }
    }
    
   /// <summary>
   /// KJD_JLINE
   /// <summary>
-  private double? _djdjline;
+  private double? _kdjjline;
    
-  [DataFieldAttribute("dfl_djdjline", "double",0,false)]
-  public double? Djdjline
+  [DataFieldAttribute("dfl_kdjjline", "double",0,false)]
+  public double? Kdjjline
   {
-   get { return _djdjline; }
-   set { _djdjline = value; }
+   get { return _kdjjline; }
+   set { _kdjjline = value; }
    }
    
   /// <summary>
   /// KJD_DLINE
   /// <summary>
-  private double? _kjddline;
+  private double? _kdjdline;
    
-  [DataFieldAttribute("dfl_kjddline", "double",0,false)]
-  public double? Kjddline
+  [DataFieldAttribute("dfl_kdjdline", "double",0,false)]
+  public double? Kdjdline
   {
-   get { return _kjddline; }
-   set { _kjddline = value; }
+   get { return _kdjdline; }
+   set { _kdjdline = value; }
    }
    
   /// <summary>
@@ -1145,7 +1085,326 @@ public class DayflowBean
    
 }
 //
-//7  分线表
+//7  周线表
+//WEEKFLOW
+[DataObjectAttribute("WEEKFLOW")]
+public class WeekflowBean
+{
+  /// <summary>
+  /// 股票代码
+  /// <summary>
+  private string _code;
+   
+  [DataFieldAttribute("wfl_code", "char",10,true)]
+  public string Code
+  {
+   get { return _code; }
+   set { _code = value; }
+   }
+   
+  /// <summary>
+  /// 日期
+  /// <summary>
+  private string _date;
+   
+  [DataFieldAttribute("wfl_date", "char",10,true)]
+  public string Date
+  {
+   get { return _date; }
+   set { _date = value; }
+   }
+   
+  /// <summary>
+  /// 股票名字
+  /// <summary>
+  private string _name;
+   
+  [DataFieldAttribute("wfl_name", "char",40,false)]
+  public string Name
+  {
+   get { return _name; }
+   set { _name = value; }
+   }
+   
+  /// <summary>
+  /// 本周开盘价
+  /// <summary>
+  private double? _startprice;
+   
+  [DataFieldAttribute("wfl_startprice", "double",0,false)]
+  public double? Startprice
+  {
+   get { return _startprice; }
+   set { _startprice = value; }
+   }
+   
+  /// <summary>
+  /// 上周收盘价
+  /// <summary>
+  private double? _lastprice;
+   
+  [DataFieldAttribute("wfl_lastprice", "double",0,false)]
+  public double? Lastprice
+  {
+   get { return _lastprice; }
+   set { _lastprice = value; }
+   }
+   
+  /// <summary>
+  /// 本周最高价
+  /// <summary>
+  private double? _hightprice;
+   
+  [DataFieldAttribute("wfl_hightprice", "double",0,false)]
+  public double? Hightprice
+  {
+   get { return _hightprice; }
+   set { _hightprice = value; }
+   }
+   
+  /// <summary>
+  /// 本周最低价
+  /// <summary>
+  private double? _lowprice;
+   
+  [DataFieldAttribute("wfl_lowprice", "double",0,false)]
+  public double? Lowprice
+  {
+   get { return _lowprice; }
+   set { _lowprice = value; }
+   }
+   
+  /// <summary>
+  /// 本周收盘价
+  /// <summary>
+  private double? _endprice;
+   
+  [DataFieldAttribute("wfl_endprice", "double",0,false)]
+  public double? Endprice
+  {
+   get { return _endprice; }
+   set { _endprice = value; }
+   }
+   
+  /// <summary>
+  /// 成交股数
+  /// <summary>
+  private double? _tradenum;
+   
+  [DataFieldAttribute("wfl_tradenum", "double",0,false)]
+  public double? Tradenum
+  {
+   get { return _tradenum; }
+   set { _tradenum = value; }
+   }
+   
+  /// <summary>
+  /// 成交金额
+  /// <summary>
+  private double? _summoney;
+   
+  [DataFieldAttribute("wfl_summoney", "double",0,false)]
+  public double? Summoney
+  {
+   get { return _summoney; }
+   set { _summoney = value; }
+   }
+   
+  /// <summary>
+  /// 流入资金
+  /// <summary>
+  private double? _insum;
+   
+  [DataFieldAttribute("wfl_insum", "double",0,false)]
+  public double? Insum
+  {
+   get { return _insum; }
+   set { _insum = value; }
+   }
+   
+  /// <summary>
+  /// 流出资金
+  /// <summary>
+  private double? _outsum;
+   
+  [DataFieldAttribute("wfl_outsum", "double",0,false)]
+  public double? Outsum
+  {
+   get { return _outsum; }
+   set { _outsum = value; }
+   }
+   
+  /// <summary>
+  /// MACD_NEAREMA
+  /// <summary>
+  private double? _nearema;
+   
+  [DataFieldAttribute("wfl_nearema", "double",0,false)]
+  public double? Nearema
+  {
+   get { return _nearema; }
+   set { _nearema = value; }
+   }
+   
+  /// <summary>
+  /// MACD_FAREMA
+  /// <summary>
+  private double? _farema;
+   
+  [DataFieldAttribute("wfl_farema", "double",0,false)]
+  public double? Farema
+  {
+   get { return _farema; }
+   set { _farema = value; }
+   }
+   
+  /// <summary>
+  /// MACD_DEA
+  /// <summary>
+  private double? _macddea;
+   
+  [DataFieldAttribute("wfl_macddea", "double",0,false)]
+  public double? Macddea
+  {
+   get { return _macddea; }
+   set { _macddea = value; }
+   }
+   
+  /// <summary>
+  /// MACD_BAR
+  /// <summary>
+  private double? _macdbar;
+   
+  [DataFieldAttribute("wfl_macdbar", "double",0,false)]
+  public double? Macdbar
+  {
+   get { return _macdbar; }
+   set { _macdbar = value; }
+   }
+   
+  /// <summary>
+  /// KJD_KLINE
+  /// <summary>
+  private double? _kdjkline;
+   
+  [DataFieldAttribute("wfl_kdjkline", "double",0,false)]
+  public double? Kdjkline
+  {
+   get { return _kdjkline; }
+   set { _kdjkline = value; }
+   }
+   
+  /// <summary>
+  /// KJD_JLINE
+  /// <summary>
+  private double? _kdjjline;
+   
+  [DataFieldAttribute("wfl_kdjjline", "double",0,false)]
+  public double? Kdjjline
+  {
+   get { return _kdjjline; }
+   set { _kdjjline = value; }
+   }
+   
+  /// <summary>
+  /// KJD_DLINE
+  /// <summary>
+  private double? _kdjdline;
+   
+  [DataFieldAttribute("wfl_kdjdline", "double",0,false)]
+  public double? Kdjdline
+  {
+   get { return _kdjdline; }
+   set { _kdjdline = value; }
+   }
+   
+  /// <summary>
+  /// BOLL_SUPER
+  /// <summary>
+  private double? _bollsuper;
+   
+  [DataFieldAttribute("wfl_bollsuper", "double",0,false)]
+  public double? Bollsuper
+  {
+   get { return _bollsuper; }
+   set { _bollsuper = value; }
+   }
+   
+  /// <summary>
+  /// BOLL_MIDDLE
+  /// <summary>
+  private double? _bollmiddle;
+   
+  [DataFieldAttribute("wfl_bollmiddle", "double",0,false)]
+  public double? Bollmiddle
+  {
+   get { return _bollmiddle; }
+   set { _bollmiddle = value; }
+   }
+   
+  /// <summary>
+  /// BOLL_LOWER
+  /// <summary>
+  private double? _bolllower;
+   
+  [DataFieldAttribute("wfl_bolllower", "double",0,false)]
+  public double? Bolllower
+  {
+   get { return _bolllower; }
+   set { _bolllower = value; }
+   }
+   
+  /// <summary>
+  /// 更新时间
+  /// <summary>
+  private string _updatetime;
+   
+  [DataFieldAttribute("wfl_updatetime", "char",60,false)]
+  public string Updatetime
+  {
+   get { return _updatetime; }
+   set { _updatetime = value; }
+   }
+   
+  /// <summary>
+  /// 备用字段1
+  /// <summary>
+  private string _bak1;
+   
+  [DataFieldAttribute("wfl_bak1", "char",20,false)]
+  public string Bak1
+  {
+   get { return _bak1; }
+   set { _bak1 = value; }
+   }
+   
+  /// <summary>
+  /// 备用字段2
+  /// <summary>
+  private string _bak2;
+   
+  [DataFieldAttribute("wfl_bak2", "char",60,false)]
+  public string Bak2
+  {
+   get { return _bak2; }
+   set { _bak2 = value; }
+   }
+   
+  /// <summary>
+  /// 备用字段3
+  /// <summary>
+  private string _bak3;
+   
+  [DataFieldAttribute("wfl_bak3", "char",200,false)]
+  public string Bak3
+  {
+   get { return _bak3; }
+   set { _bak3 = value; }
+   }
+   
+}
+//
+//8  分线表
 //MIN5FLOW
 [DataObjectAttribute("MIN5FLOW")]
 public class Min5flowBean
@@ -1321,37 +1580,37 @@ public class Min5flowBean
   /// <summary>
   /// KJD_KLINE
   /// <summary>
-  private double? _kjdkline;
+  private double? _kdjkline;
    
-  [DataFieldAttribute("m5f_kjdkline", "double",0,false)]
-  public double? Kjdkline
+  [DataFieldAttribute("m5f_kdjkline", "double",0,false)]
+  public double? Kdjkline
   {
-   get { return _kjdkline; }
-   set { _kjdkline = value; }
+   get { return _kdjkline; }
+   set { _kdjkline = value; }
    }
    
   /// <summary>
   /// KJD_JLINE
   /// <summary>
-  private double? _djdjline;
+  private double? _kdjjline;
    
-  [DataFieldAttribute("m5f_djdjline", "double",0,false)]
-  public double? Djdjline
+  [DataFieldAttribute("m5f_kdjjline", "double",0,false)]
+  public double? Kdjjline
   {
-   get { return _djdjline; }
-   set { _djdjline = value; }
+   get { return _kdjjline; }
+   set { _kdjjline = value; }
    }
    
   /// <summary>
   /// KJD_DLINE
   /// <summary>
-  private double? _kjddline;
+  private double? _kdjdline;
    
-  [DataFieldAttribute("m5f_kjddline", "double",0,false)]
-  public double? Kjddline
+  [DataFieldAttribute("m5f_kdjdline", "double",0,false)]
+  public double? Kdjdline
   {
-   get { return _kjddline; }
-   set { _kjddline = value; }
+   get { return _kdjdline; }
+   set { _kdjdline = value; }
    }
    
   /// <summary>
@@ -1424,6 +1683,248 @@ public class Min5flowBean
   {
    get { return _bak3; }
    set { _bak3 = value; }
+   }
+   
+}
+//
+//9  指标分析表
+//INDEXANALYS
+[DataObjectAttribute("INDEXANALYS")]
+public class IndexanalysBean
+{
+  /// <summary>
+  /// 编号
+  /// <summary>
+  private string _id;
+   
+  [DataFieldAttribute("ina_id", "char",30,true)]
+  public string Id
+  {
+   get { return _id; }
+   set { _id = value; }
+   }
+   
+  /// <summary>
+  /// 股票代码
+  /// <summary>
+  private string _code;
+   
+  [DataFieldAttribute("ina_code", "char",10,false)]
+  public string Code
+  {
+   get { return _code; }
+   set { _code = value; }
+   }
+   
+  /// <summary>
+  /// 日期
+  /// <summary>
+  private string _date;
+   
+  [DataFieldAttribute("ina_date", "char",10,false)]
+  public string Date
+  {
+   get { return _date; }
+   set { _date = value; }
+   }
+   
+  /// <summary>
+  /// 时间
+  /// <summary>
+  private string _time;
+   
+  [DataFieldAttribute("ina_time", "char",10,false)]
+  public string Time
+  {
+   get { return _time; }
+   set { _time = value; }
+   }
+   
+  /// <summary>
+  /// 股票名称
+  /// <summary>
+  private string _name;
+   
+  [DataFieldAttribute("ina_name", "char",40,false)]
+  public string Name
+  {
+   get { return _name; }
+   set { _name = value; }
+   }
+   
+  /// <summary>
+  /// 指标类型
+  /// <summary>
+  private string _type;
+   
+  [DataFieldAttribute("ina_type", "char",10,false)]
+  public string Type
+  {
+   get { return _type; }
+   set { _type = value; }
+   }
+   
+  /// <summary>
+  /// 指标子类型
+  /// <summary>
+  private string _subtype;
+   
+  [DataFieldAttribute("ina_subtype", "char",10,false)]
+  public string Subtype
+  {
+   get { return _subtype; }
+   set { _subtype = value; }
+   }
+   
+  /// <summary>
+  /// 标志
+  /// <summary>
+  private string _flag;
+   
+  [DataFieldAttribute("ina_flag", "char",10,false)]
+  public string Flag
+  {
+   get { return _flag; }
+   set { _flag = value; }
+   }
+   
+  /// <summary>
+  /// 当日收盘价
+  /// <summary>
+  private double? _markprice;
+   
+  [DataFieldAttribute("ina_markprice", "double",0,false)]
+  public double? Markprice
+  {
+   get { return _markprice; }
+   set { _markprice = value; }
+   }
+   
+  /// <summary>
+  /// 当日涨幅
+  /// <summary>
+  private double? _todayincrease;
+   
+  [DataFieldAttribute("ina_todayincrease", "double",0,false)]
+  public double? Todayincrease
+  {
+   get { return _todayincrease; }
+   set { _todayincrease = value; }
+   }
+   
+  /// <summary>
+  /// 第二天涨幅
+  /// <summary>
+  private double? _nextincrease;
+   
+  [DataFieldAttribute("ina_nextincrease", "double",0,false)]
+  public double? Nextincrease
+  {
+   get { return _nextincrease; }
+   set { _nextincrease = value; }
+   }
+   
+  /// <summary>
+  /// 5日涨幅
+  /// <summary>
+  private double? _day5increase;
+   
+  [DataFieldAttribute("ina_day5increase", "double",0,false)]
+  public double? Day5increase
+  {
+   get { return _day5increase; }
+   set { _day5increase = value; }
+   }
+   
+  /// <summary>
+  /// 10日涨幅
+  /// <summary>
+  private double? _day10increase;
+   
+  [DataFieldAttribute("ina_day10increase", "double",0,false)]
+  public double? Day10increase
+  {
+   get { return _day10increase; }
+   set { _day10increase = value; }
+   }
+   
+}
+//
+//10  网络错误重提表
+//NETERR
+[DataObjectAttribute("NETERR")]
+public class NeterrBean
+{
+  /// <summary>
+  /// 编号
+  /// <summary>
+  private string _id;
+   
+  [DataFieldAttribute("nte_id", "char",30,true)]
+  public string Id
+  {
+   get { return _id; }
+   set { _id = value; }
+   }
+   
+  /// <summary>
+  /// 股票代码
+  /// <summary>
+  private string _code;
+   
+  [DataFieldAttribute("nte_code", "char",10,false)]
+  public string Code
+  {
+   get { return _code; }
+   set { _code = value; }
+   }
+   
+  /// <summary>
+  /// 股票名称
+  /// <summary>
+  private string _name;
+   
+  [DataFieldAttribute("nte_name", "char",40,false)]
+  public string Name
+  {
+   get { return _name; }
+   set { _name = value; }
+   }
+   
+  /// <summary>
+  /// 日期
+  /// <summary>
+  private string _date;
+   
+  [DataFieldAttribute("nte_date", "char",10,false)]
+  public string Date
+  {
+   get { return _date; }
+   set { _date = value; }
+   }
+   
+  /// <summary>
+  /// 错误类型
+  /// <summary>
+  private string _type;
+   
+  [DataFieldAttribute("nte_type", "char",40,false)]
+  public string Type
+  {
+   get { return _type; }
+   set { _type = value; }
+   }
+   
+  /// <summary>
+  /// 备注
+  /// <summary>
+  private string _remark;
+   
+  [DataFieldAttribute("nte_remark", "char",200,false)]
+  public string Remark
+  {
+   get { return _remark; }
+   set { _remark = value; }
    }
    
 }

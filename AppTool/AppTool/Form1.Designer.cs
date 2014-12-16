@@ -52,12 +52,23 @@
             this.whereTB = new System.Windows.Forms.TextBox();
             this.dbtool = new System.Windows.Forms.TabControl();
             this.stock_tab = new System.Windows.Forms.TabPage();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.DayKDJAnalysis = new System.Windows.Forms.Button();
+            this.DayKDJCalc = new System.Windows.Forms.Button();
+            this.DayMACDAnalysis = new System.Windows.Forms.Button();
+            this.DayMACDCalc = new System.Windows.Forms.Button();
+            this.test = new System.Windows.Forms.Button();
             this.Min5KLine = new System.Windows.Forms.Button();
             this.historydatabar = new System.Windows.Forms.ProgressBar();
             this.HistoryKLine = new System.Windows.Forms.Button();
             this.DayKLine = new System.Windows.Forms.Button();
             this.AllStockCode = new System.Windows.Forms.Button();
-            this.test = new System.Windows.Forms.Button();
+            this.WeekHisLine = new System.Windows.Forms.Button();
             this.memcached.SuspendLayout();
             this.ptf_tb.SuspendLayout();
             this.dbAcv_tab.SuspendLayout();
@@ -284,6 +295,17 @@
             // 
             // stock_tab
             // 
+            this.stock_tab.Controls.Add(this.WeekHisLine);
+            this.stock_tab.Controls.Add(this.button8);
+            this.stock_tab.Controls.Add(this.button7);
+            this.stock_tab.Controls.Add(this.button6);
+            this.stock_tab.Controls.Add(this.button5);
+            this.stock_tab.Controls.Add(this.button4);
+            this.stock_tab.Controls.Add(this.button3);
+            this.stock_tab.Controls.Add(this.DayKDJAnalysis);
+            this.stock_tab.Controls.Add(this.DayKDJCalc);
+            this.stock_tab.Controls.Add(this.DayMACDAnalysis);
+            this.stock_tab.Controls.Add(this.DayMACDCalc);
             this.stock_tab.Controls.Add(this.test);
             this.stock_tab.Controls.Add(this.Min5KLine);
             this.stock_tab.Controls.Add(this.historydatabar);
@@ -298,6 +320,109 @@
             this.stock_tab.Text = "stock";
             this.stock_tab.UseVisualStyleBackColor = true;
             // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(537, 194);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(101, 23);
+            this.button8.TabIndex = 15;
+            this.button8.Text = "button8";
+            this.button8.UseVisualStyleBackColor = true;
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(407, 194);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(103, 23);
+            this.button7.TabIndex = 14;
+            this.button7.Text = "button7";
+            this.button7.UseVisualStyleBackColor = true;
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(537, 149);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(101, 23);
+            this.button6.TabIndex = 13;
+            this.button6.Text = "button6";
+            this.button6.UseVisualStyleBackColor = true;
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(407, 149);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(103, 23);
+            this.button5.TabIndex = 12;
+            this.button5.Text = "button5";
+            this.button5.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(537, 105);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(101, 23);
+            this.button4.TabIndex = 11;
+            this.button4.Text = "button4";
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(407, 106);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(103, 23);
+            this.button3.TabIndex = 10;
+            this.button3.Text = "button3";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // DayKDJAnalysis
+            // 
+            this.DayKDJAnalysis.Location = new System.Drawing.Point(537, 68);
+            this.DayKDJAnalysis.Name = "DayKDJAnalysis";
+            this.DayKDJAnalysis.Size = new System.Drawing.Size(101, 23);
+            this.DayKDJAnalysis.TabIndex = 9;
+            this.DayKDJAnalysis.Text = "日KDJ指标分析";
+            this.DayKDJAnalysis.UseVisualStyleBackColor = true;
+            // 
+            // DayKDJCalc
+            // 
+            this.DayKDJCalc.Location = new System.Drawing.Point(407, 68);
+            this.DayKDJCalc.Name = "DayKDJCalc";
+            this.DayKDJCalc.Size = new System.Drawing.Size(103, 23);
+            this.DayKDJCalc.TabIndex = 8;
+            this.DayKDJCalc.Text = "日KDJ指标计算";
+            this.DayKDJCalc.UseVisualStyleBackColor = true;
+            this.DayKDJCalc.Click += new System.EventHandler(this.DayKDJCalc_Click);
+            // 
+            // DayMACDAnalysis
+            // 
+            this.DayMACDAnalysis.Location = new System.Drawing.Point(537, 24);
+            this.DayMACDAnalysis.Name = "DayMACDAnalysis";
+            this.DayMACDAnalysis.Size = new System.Drawing.Size(101, 23);
+            this.DayMACDAnalysis.TabIndex = 7;
+            this.DayMACDAnalysis.Text = "日MACD指标分析";
+            this.DayMACDAnalysis.UseVisualStyleBackColor = true;
+            this.DayMACDAnalysis.Click += new System.EventHandler(this.DayMACDAnalysis_Click);
+            // 
+            // DayMACDCalc
+            // 
+            this.DayMACDCalc.Location = new System.Drawing.Point(407, 24);
+            this.DayMACDCalc.Name = "DayMACDCalc";
+            this.DayMACDCalc.Size = new System.Drawing.Size(103, 23);
+            this.DayMACDCalc.TabIndex = 6;
+            this.DayMACDCalc.Text = "日MACD指标计算";
+            this.DayMACDCalc.UseVisualStyleBackColor = true;
+            this.DayMACDCalc.Click += new System.EventHandler(this.DayMACD_Click);
+            // 
+            // test
+            // 
+            this.test.Location = new System.Drawing.Point(21, 24);
+            this.test.Name = "test";
+            this.test.Size = new System.Drawing.Size(75, 23);
+            this.test.TabIndex = 5;
+            this.test.Text = "测试";
+            this.test.UseVisualStyleBackColor = true;
+            this.test.Click += new System.EventHandler(this.test_Click);
+            // 
             // Min5KLine
             // 
             this.Min5KLine.Location = new System.Drawing.Point(21, 149);
@@ -310,7 +435,7 @@
             // 
             // historydatabar
             // 
-            this.historydatabar.Location = new System.Drawing.Point(161, 107);
+            this.historydatabar.Location = new System.Drawing.Point(161, 68);
             this.historydatabar.Name = "historydatabar";
             this.historydatabar.Size = new System.Drawing.Size(134, 23);
             this.historydatabar.TabIndex = 3;
@@ -321,7 +446,7 @@
             this.HistoryKLine.Name = "HistoryKLine";
             this.HistoryKLine.Size = new System.Drawing.Size(134, 23);
             this.HistoryKLine.TabIndex = 2;
-            this.HistoryKLine.Text = "取HISTORY数据";
+            this.HistoryKLine.Text = "取DAYLINE数据";
             this.HistoryKLine.UseVisualStyleBackColor = true;
             this.HistoryKLine.Click += new System.EventHandler(this.HistoryKLine_Click);
             // 
@@ -345,15 +470,15 @@
             this.AllStockCode.UseVisualStyleBackColor = true;
             this.AllStockCode.Click += new System.EventHandler(this.AllStockCode_Click);
             // 
-            // test
+            // WeekHisLine
             // 
-            this.test.Location = new System.Drawing.Point(21, 24);
-            this.test.Name = "test";
-            this.test.Size = new System.Drawing.Size(75, 23);
-            this.test.TabIndex = 5;
-            this.test.Text = "测试";
-            this.test.UseVisualStyleBackColor = true;
-            this.test.Click += new System.EventHandler(this.test_Click);
+            this.WeekHisLine.Location = new System.Drawing.Point(162, 105);
+            this.WeekHisLine.Name = "WeekHisLine";
+            this.WeekHisLine.Size = new System.Drawing.Size(133, 23);
+            this.WeekHisLine.TabIndex = 16;
+            this.WeekHisLine.Text = "取WEEKLINE数据";
+            this.WeekHisLine.UseVisualStyleBackColor = true;
+            this.WeekHisLine.Click += new System.EventHandler(this.WeekHisLine_Click);
             // 
             // Form1
             // 
@@ -407,6 +532,17 @@
         private System.Windows.Forms.ProgressBar historydatabar;
         private System.Windows.Forms.Button Min5KLine;
         private System.Windows.Forms.Button test;
+        private System.Windows.Forms.Button DayMACDCalc;
+        private System.Windows.Forms.Button DayMACDAnalysis;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button DayKDJAnalysis;
+        private System.Windows.Forms.Button DayKDJCalc;
+        private System.Windows.Forms.Button WeekHisLine;
 
     }
 }
